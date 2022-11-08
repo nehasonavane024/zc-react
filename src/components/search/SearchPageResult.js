@@ -14,7 +14,7 @@ function SearchPageResult() {
   let getLocationList = async () => {
     try {
       let response = await axios.get(
-        "http://localhost:5003/api/get-location"
+        " https://zc-backend.herokuapp.com/api/get-location"
       );
       let data = response.data;
       if (data.status === true) {
@@ -29,7 +29,7 @@ function SearchPageResult() {
   };
 
   let filterOperation = async (filter) => {
-    let URL = "http://localhost:5003/api/filter";
+    let URL = " https://zc-backend.herokuapp.com/api/filter";
     try {
       let { data } = await axios.post(URL, filter);
       if (data.status === true) {
@@ -59,6 +59,13 @@ function SearchPageResult() {
         let costForTwo = value.split("-");
         _filter["lcost"] = Number(costForTwo[0]);
         _filter["hcost"] = Number(costForTwo[1]);
+        break;
+        case "page":
+        _filter["page"] = Number(value);
+        console.log(_filter);
+        break;
+      case "cuisine":
+        _filter["cuisine"] = Number(value);
         break;
     }
     console.log(_filter);
@@ -111,7 +118,7 @@ function SearchPageResult() {
                 </select>
               </div>
               <p className="mt-4 mb-2 fw-bold">Cuisine</p>
-              <div>
+              {/* <div>
                 <div className="ms-1">
                   <input
                     type="checkbox"
@@ -157,6 +164,63 @@ function SearchPageResult() {
                     type="checkbox"
                     className="form-check-input"
                     value="5"
+                  />
+                  <label htmlFor="" className="form-check-label ms-1">
+                    Street Food
+                  </label>
+                </div>
+              </div> */}
+              <div>
+                <div className="ms-1">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    value="1"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                  />
+                  <label htmlFor="" className="form-check-label ms-1">
+                    North Indian
+                  </label>
+                </div>
+                <div className="ms-1">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    value="2"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                  />
+                  <label htmlFor="" className="form-check-label ms-1">
+                    South Indian
+                  </label>
+                </div>
+                <div className="ms-1">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    value="3"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                  />
+                  <label htmlFor="" className="form-check-label ms-1">
+                    Chinese
+                  </label>
+                </div>
+                <div className="ms-1">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    value="4"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
+                  />
+                  <label htmlFor="" className="form-check-label ms-1">
+                    Fast Food
+                  </label>
+                </div>
+                <div className="ms-1">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    value="5"
+                    onChange={(event) => makeFiltration(event, "cuisine")}
                   />
                   <label htmlFor="" className="form-check-label ms-1">
                     Street Food
@@ -305,13 +369,47 @@ function SearchPageResult() {
                 </div>
               );
             })}
-            <div className="col-12 pagination d-flex justify-content-center">
+            {/* <div className="col-12 pagination d-flex justify-content-center">
               <ul className="pages">
                 <li>&lt;</li>
                 <li className="active">1</li>
                 <li>2</li>
                 <li>3</li>
                 <li>4</li>
+                <li>&gt;</li>
+              </ul>
+            </div> */}
+            <div className="col-12 pagination d-flex justify-content-center">
+              <ul className="pages">
+                <li>&lt;</li>
+               <li  className="shadow-sm page-item fw-bold" 
+               onClick={(event) => makeFiltration(event, "page")} value={1} > 
+                1 
+                </li> 
+                <li 
+                          className="shadow-sm page-item fw-bold" 
+                          onClick={(event) => makeFiltration(event, "page")} value={2}
+                        > 
+                          2 
+                        </li>
+                <li 
+                          className="shadow-sm page-item fw-bold" 
+                          onClick={(event) => makeFiltration(event, "page")} value={3}
+                        > 
+                          3 
+                        </li> 
+               <li 
+                          className="shadow-sm page-item fw-bold" 
+                          onClick={(event) => makeFiltration(event, "page")} value={4}
+                        > 
+                          4 
+                        </li> 
+                        <li 
+                          className="shadow-sm page-item fw-bold" 
+                          onClick={(event) => makeFiltration(event, "page")} value={5}
+                        > 
+                          5 
+                        </li> 
                 <li>&gt;</li>
               </ul>
             </div>

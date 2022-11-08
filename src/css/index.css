@@ -76,7 +76,7 @@
   color: gray;
   font-weight: bold;
 }
-.pages .active {
+.pages li:hover {
   border: 1px solid white;
   color: white;
   background-color: gray;
